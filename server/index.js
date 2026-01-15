@@ -1,0 +1,46 @@
+// imports
+const express = require("express");
+const dotenv = require("dotenv");
+const path = require("path");
+const cors = require("cors");
+const rateLimit = require("express-rate-limit");
+const { connectToDatabase } = require("./config/dbConfig");
+const authRoutes = require("./routes/authRoutes");
+
+// Config
+dotenv.config();
+
+// App
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Connect DB
+connectToDatabase();
+
+// Middlewares
+app.use(express.json());
+app.use(
+  cors({
+    origin: process.env.CLIENT_ORIGIN || "*",
+  })
+);
+
+app.use("/public", express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Rate Limit
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 100 });
+app.use(limiter);
+
+// Main Route
+app.get("/", (req, res) => {
+  res.send("Welcome To Social Media API");
+});
+
+// Routes
+app.use("/api/v1/auth", authRoutes);
+
+
+app.listen(PORT, () => {
+  console.log(`SERVER RUNNING @PORT: ${PORT}`);
+});
