@@ -51,7 +51,22 @@ exports.register = async (req, res) => {
     });
 
     // Send Email
-    await sendMail(email, "Verify Your Account", `Your OTP is: ${otp}`);
+    try {
+      await sendMail({
+        email: user.email,
+        subject: "Sync Account Verification",
+        message: `Your verification code is: ${otp}. It expires in 10 minutes.`,
+      });
+
+      res.status(201).json({
+        success: true,
+        message: `Registered! An OTP has been sent to ${email}`,
+        userId: user._id, 
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Email could not be sent" });
+    }
 
     res.status(201).json({
       message: "User registered successfully. Please check your email for OTP.",
@@ -153,11 +168,22 @@ exports.forgotPassword = async (req, res) => {
     // URL
     const resetUrl = `${process.env.CLIENT_ORIGIN}/reset-password/${resetToken}`;
 
-    await sendMail(
-      user.email,
-      "Password Reset Request",
-      `Click the link to reset your password: ${resetUrl}`
-    );
+    try {
+      await sendMail({
+        email: user.email,
+        subject: "Sync Account Password Reset Request",
+        message: `Click the link to reset your password: ${resetUrl}`,
+      });
+
+      res.status(201).json({
+        success: true,
+        message: `Password reset link has been sent to ${email}`,
+        userId: user._id, 
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Email could not be sent" });
+    }
 
     res.json({ message: "Password reset link sent to email" });
   } catch (error) {
