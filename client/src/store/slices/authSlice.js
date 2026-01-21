@@ -2,6 +2,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../apis/api";
 import toast from "react-hot-toast";
 
+export const loadUser = createAsyncThunk(
+  "auth/loadUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await API.get("/auth/me");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Session expired"
+      );
+    }
+  }
+);
+
 // Register
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
@@ -57,8 +71,9 @@ const authSlice = createSlice({
     user: null,
     token: localStorage.getItem("token") || null,
     loading: false,
+    authLoading: true,
     error: null,
-    registerSuccess: false, 
+    registerSuccess: false,
   },
   reducers: {
     logout: (state) => {
@@ -73,6 +88,19 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(loadUser.pending, (state) => {
+        state.authLoading = true;
+      })
+      .addCase(loadUser.fulfilled, (state, action) => {
+        state.authLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(loadUser.rejected, (state) => {
+        state.authLoading = false;
+        state.user = null;
+        state.token = null;
+        localStorage.removeItem("token"); // Clear invalid token
+      })
       // Register
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
@@ -95,6 +123,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.authLoading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
