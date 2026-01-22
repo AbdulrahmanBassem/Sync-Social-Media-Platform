@@ -50,7 +50,10 @@ app.use("/api/v1/comments", commentRoutes);
 app.use("/api/v1/notifications", notificationRoutes);
 app.use("/api/v1/messages", messageRoutes);
 
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`SERVER RUNNING @PORT: ${PORT}`);
+  });
+}
 
-app.listen(PORT, () => {
-  console.log(`SERVER RUNNING @PORT: ${PORT}`);
-});
+module.exports = app;
