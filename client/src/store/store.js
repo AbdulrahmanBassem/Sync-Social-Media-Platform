@@ -4,6 +4,7 @@ import themeReducer from "./slices/themeSlice";
 import postReducer from "./slices/postSlice";
 import profileReducer from "./slices/profileSlice";
 import searchReducer from "./slices/searchSlice";
+import messageReducer from "./slices/messageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     posts: postReducer,
     profile: profileReducer,
     search: searchReducer,
+    messages: messageReducer,
   },
 });

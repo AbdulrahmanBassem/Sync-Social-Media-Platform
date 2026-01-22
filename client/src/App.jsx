@@ -11,9 +11,9 @@ import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
+import Messages from "./pages/Messages";
 
 // Placeholder Pages
-const Messages = () => <h1>Messages</h1>;
 const Notifications = () => <h1>Notifications</h1>;
 
 function App() {

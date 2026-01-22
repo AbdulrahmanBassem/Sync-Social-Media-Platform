@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile, getUserPosts, updateUserProfile, updateProfilePicture } from "../store/slices/profileSlice";
 import { Spinner, Button, Modal, Form } from "react-bootstrap";
@@ -9,6 +9,7 @@ import "../styles/profile.css";
 const Profile = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   const { user: authUser } = useSelector((state) => state.auth);
   const { profile, posts, loading } = useSelector((state) => state.profile);
@@ -48,6 +49,10 @@ const Profile = () => {
     }
   };
 
+  const handleMessage = () => {
+    navigate("/messages", { state: { chatWith: profile } });
+  };
+
   if (loading && !profile) {
     return (
       <div className="d-flex justify-content-center mt-5">
@@ -85,7 +90,7 @@ const Profile = () => {
             <section className="profile-info">
               <div className="profile-title-row">
                 <h2 className="profile-username">{profile.username}</h2>
-                {isOwnProfile && (
+                {isOwnProfile ? (
                   <Button 
                     variant="outline-secondary" 
                     size="sm" 
@@ -96,6 +101,15 @@ const Profile = () => {
                     }}
                   >
                     Edit Profile
+                  </Button>
+                ) : (
+                  <Button 
+                    variant="primary" 
+                    size="sm" 
+                    className="ms-3 fw-bold"
+                    onClick={handleMessage}
+                  >
+                    Message
                   </Button>
                 )}
               </div>
