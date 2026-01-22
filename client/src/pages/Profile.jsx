@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile, getUserPosts, updateUserProfile, updateProfilePicture } from "../store/slices/profileSlice";
 import { Spinner, Button, Modal, Form } from "react-bootstrap";
 import { AiFillCamera } from "react-icons/ai";
-import "../styles/profile.css"; 
+import "../styles/Profile.css"; 
 
 const Profile = () => {
   const { id } = useParams();
