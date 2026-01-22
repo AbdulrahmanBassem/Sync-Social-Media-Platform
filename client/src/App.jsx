@@ -12,9 +12,9 @@ import CreatePost from "./pages/CreatePost";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import Messages from "./pages/Messages";
+import PostDetails from "./pages/PostDetails";
+import Notifications from "./pages/Notifications";
 
-// Placeholder Pages
-const Notifications = () => <h1>Notifications</h1>;
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +51,7 @@ function App() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/create" element={<CreatePost />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/post/:id" element={<PostDetails />} />
         </Route>
       </Routes>
     </div>

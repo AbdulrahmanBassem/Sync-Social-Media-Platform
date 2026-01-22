@@ -5,6 +5,9 @@ import postReducer from "./slices/postSlice";
 import profileReducer from "./slices/profileSlice";
 import searchReducer from "./slices/searchSlice";
 import messageReducer from "./slices/messageSlice";
+import notificationReducer from "./slices/notificationSlice";
+import commentReducer from "./slices/commentSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +17,7 @@ export const store = configureStore({
     profile: profileReducer,
     search: searchReducer,
     messages: messageReducer,
+    notifications: notificationReducer, 
+    comments: commentReducer, 
   },
 });

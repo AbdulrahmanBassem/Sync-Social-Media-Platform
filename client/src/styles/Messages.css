@@ -1,6 +1,6 @@
 .messages-container {
   display: flex;
-  height: calc(100vh - 40px); /* Adjust based on navbar/margin */
+  height: calc(100vh - 40px); 
   background-color: var(--bg-primary);
   border: 1px solid var(--border-color);
   border-radius: 4px;
@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-/* --- Left Side: List --- */
+
 .conversations-list {
   width: 350px;
   border-right: 1px solid var(--border-color);
@@ -87,7 +87,7 @@
     margin-left: 5px;
 }
 
-/* --- Right Side: Chat Window --- */
+
 .chat-window {
   flex: 1;
   display: flex;
@@ -159,7 +159,7 @@
 }
 
 .own-bubble {
-  background-color: var(--btn-primary); /* Use theme color (blue) */
+  background-color: var(--btn-primary); 
   color: white;
   border-bottom-right-radius: 4px;
 }
@@ -191,7 +191,7 @@
   color: var(--text-primary);
 }
 
-/* Empty State */
+
 .empty-chat-state {
   flex: 1;
   display: flex;
@@ -212,10 +212,10 @@
   margin-bottom: 20px;
 }
 
-/* Mobile Responsiveness */
+
 @media (max-width: 768px) {
   .messages-container {
-    height: calc(100vh - 120px); /* Adjust for bottom nav */
+    height: calc(100vh - 120px); 
     border: none;
   }
   

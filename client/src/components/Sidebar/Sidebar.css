@@ -77,3 +77,19 @@
 .logout-btn {
   color: #ff4757;
 }
+
+.badge-count {
+  position: absolute;
+  top: -5px;
+  left: 18px; 
+  background-color: #ed4956;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
