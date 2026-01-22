@@ -5,7 +5,7 @@ import { Spinner, Form, Button } from "react-bootstrap";
 import { AiOutlineSend, AiOutlineArrowLeft } from "react-icons/ai";
 import { useLocation } from "react-router-dom"; 
 import moment from "moment";
-import "../styles/messages.css";
+import "../styles/Messages.css";
 
 const Messages = () => {
   const dispatch = useDispatch();
