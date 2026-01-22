@@ -4,6 +4,8 @@ const postController = require("../controllers/postController");
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const { upload } = require("../utils/upload");
 
+
+router.get("/search", postController.searchPosts);
 router.get("/", postController.getAllPosts); // Get Feed
 router.get("/:id", postController.getPostById); // Get Single Post
 

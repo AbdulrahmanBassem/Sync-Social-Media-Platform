@@ -122,3 +122,24 @@ exports.likePost = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+exports.searchPosts = async (req, res) => {
+  try {
+    const query = req.query.q;
+    if (!query) return res.status(400).json({ message: "Query is required" });
+
+    const posts = await Post.find({
+      $or: [
+        { caption: { $regex: query, $options: "i" } },
+        { tags: { $in: [new RegExp(query, "i")] } }, 
+      ],
+    })
+      .populate("userId", "name username profilePic")
+      .sort({ createdAt: -1 });
+
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};

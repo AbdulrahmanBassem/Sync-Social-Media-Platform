@@ -10,9 +10,9 @@ import VerifyOTP from "./pages/VerifyOTP";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import Profile from "./pages/Profile";
+import Search from "./pages/Search";
 
 // Placeholder Pages
-const Search = () => <h1>Search</h1>;
 const Messages = () => <h1>Messages</h1>;
 const Notifications = () => <h1>Notifications</h1>;
 
