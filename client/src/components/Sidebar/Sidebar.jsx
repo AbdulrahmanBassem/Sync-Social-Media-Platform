@@ -66,7 +66,7 @@ const Sidebar = () => {
             )}
           </NavLink>
 
-          <NavLink to={`/profile/${user?.username}`} className="sidebar-link">
+          <NavLink to={`/profile/${user?._id}`} className="sidebar-link">
             <CgProfile size={28} />
             <span className="link-text">Profile</span>
           </NavLink>

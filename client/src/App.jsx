@@ -9,12 +9,12 @@ import Register from "./pages/Register";
 import VerifyOTP from "./pages/VerifyOTP";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
+import Profile from "./pages/Profile";
 
 // Placeholder Pages
 const Search = () => <h1>Search</h1>;
 const Messages = () => <h1>Messages</h1>;
 const Notifications = () => <h1>Notifications</h1>;
-const Profile = () => <h1>Profile</h1>;
 
 function App() {
   const dispatch = useDispatch();
