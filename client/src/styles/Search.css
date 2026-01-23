@@ -29,11 +29,11 @@
   color: var(--text-primary);
 }
 
-.custom-tabs {
+.custom-tabs-search {
   border-bottom: 1px solid var(--border-color);
 }
 
-.custom-tabs .nav-link {
+.custom-tabs-search  {
   color: var(--text-secondary);
   border: none;
   border-bottom: 2px solid transparent;
@@ -42,7 +42,7 @@
   font-weight: 600;
 }
 
-.custom-tabs .nav-link:hover {
+.custom-tabs-search .nav-link:hover {
   color: var(--text-primary);
 }
 

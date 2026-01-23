@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile, getUserPosts, updateUserProfile, updateProfilePicture } from "../store/slices/profileSlice";
 import { Spinner, Button, Modal, Form } from "react-bootstrap";
 import { AiFillCamera } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import "../styles/Profile.css"; 
 
 const Profile = () => {
@@ -134,13 +135,15 @@ const Profile = () => {
           {posts.length > 0 ? (
             <div className="profile-grid">
               {posts.map((post) => (
-                <div key={post._id} className="grid-item">
-                  {post.images && post.images.length > 0 ? (
-                    <img src={getImageUrl(post.images[0])} alt="post" />
-                  ) : (
-                    <div className="text-post-placeholder">{post.caption}</div>
-                  )}
-                </div>
+                <Link to={`/post/${post._id}`} key={post._id}>
+                  <div key={post._id} className="grid-item">
+                    {post.images && post.images.length > 0 ? (
+                      <img src={getImageUrl(post.images[0])} alt="post" />
+                    ) : (
+                      <div className="text-post-placeholder">{post.caption}</div>
+                    )}
+                  </div>
+                </Link>
               ))}
             </div>
           ) : (

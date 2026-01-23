@@ -34,7 +34,7 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Rate Limit
-const limiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 100 });
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 500 });
 app.use(limiter);
 
 // Main Route

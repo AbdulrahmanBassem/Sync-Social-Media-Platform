@@ -63,7 +63,7 @@ const Search = () => {
         </Form>
       </div>
 
-      <Nav variant="tabs" className="mb-4 custom-tabs" activeKey={activeTab}>
+      <Nav variant="tabs" className="mb-4 custom-tabs-search" activeKey={activeTab}>
         <Nav.Item>
           <Nav.Link 
             eventKey="accounts" 
