@@ -35,7 +35,7 @@ const Login = () => {
       </div>
 
       <div className="auth-card">
-        <h1 className="brand-title">Social App</h1>
+        <h1 className="brand-title">Sync</h1>
         
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">

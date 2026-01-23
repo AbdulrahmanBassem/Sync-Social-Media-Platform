@@ -44,7 +44,7 @@ const Register = () => {
       </div>
 
       <div className="auth-card">
-        <h1 className="brand-title">Social App</h1>
+        <h1 className="brand-title">Sync</h1>
         <p className="text-center text-muted-custom fw-bold mb-4">Sign up to see photos and videos from your friends.</p>
 
         <Form onSubmit={handleSubmit}>
