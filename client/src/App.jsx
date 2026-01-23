@@ -27,16 +27,26 @@ function App() {
     }
   }, [dispatch, token, user]);
 
+  useEffect(() => {
+    document.body.setAttribute('data-theme', mode);
+  }, [mode]);
+
   if (authLoading && token) {
     return (
-      <div className="d-flex justify-content-center align-items-center vh-100" data-theme={mode} style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div 
+        className="d-flex justify-content-center align-items-center vh-100" 
+        style={{ 
+          backgroundColor: mode === 'dark' ? '#000' : '#fff',
+          color: mode === 'dark' ? '#fff' : '#000' 
+        }}
+      >
         <Spinner animation="border" variant={mode === 'dark' ? 'light' : 'primary'} />
       </div>
     );
   }
 
   return (
-    <div className="app-container" data-theme={mode}>
+    <div className="app-container">
       <Routes>
         {/* Auth Routes */}
         <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />

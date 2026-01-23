@@ -52,7 +52,7 @@ const Register = () => {
             <Form.Control
               type="text"
               name="email"
-              placeholder="Mobile Number or Email"
+              placeholder="Email"
               className="custom-input"
               onChange={handleChange}
               required

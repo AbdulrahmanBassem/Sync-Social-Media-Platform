@@ -41,6 +41,19 @@ export const likePost = createAsyncThunk(
   }
 );
 
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async (postId, { rejectWithValue }) => {
+    try {
+      await API.delete(`/posts/${postId}`);
+      toast.success("Post deleted successfully");
+      return postId;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || "Failed to delete post");
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "posts",
   initialState: {
@@ -94,6 +107,10 @@ const postSlice = createSlice({
         if (post) {
           post.likes = likes;
         }
+      })
+
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.posts = state.posts.filter((post) => post._id !== action.payload);
       });
   },
 });

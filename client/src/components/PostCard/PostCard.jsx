@@ -1,19 +1,22 @@
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { likePost } from "../../store/slices/postSlice";
+import { likePost, deletePost } from "../../store/slices/postSlice";
 import { 
   AiOutlineHeart, 
   AiFillHeart, 
   AiOutlineMessage, 
   AiOutlineLeft,  
-  AiOutlineRight  
+  AiOutlineRight,
+  AiOutlineDelete  
 } from "react-icons/ai";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./PostCard.css"; 
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useSelector((state) => state.auth);
   
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -21,6 +24,8 @@ const PostCard = ({ post }) => {
 
   const isLiked = post.likes.includes(user?._id);
   const serverUrl = import.meta.env.VITE_SERVER_URL || "http://localhost:3000"; 
+
+  const isPostDetailsPage = location.pathname.startsWith("/post/");
 
   const getImageUrl = (path) => {
     if (!path) return "";
@@ -30,6 +35,17 @@ const PostCard = ({ post }) => {
   const handleLike = () => {
     dispatch(likePost(post._id));
   };
+
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      const result = await dispatch(deletePost(post._id));
+      if (result.meta.requestStatus === "fulfilled") {
+        navigate("/");
+      }
+    }
+  };
+
+  
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -62,7 +78,20 @@ const PostCard = ({ post }) => {
           />
           <span className="post-username">{post.userId?.username}</span>
         </Link>
-        <span className="post-time">{moment(post.createdAt).fromNow(true)}</span>
+        <div className="d-flex align-items-center gap-3">
+          <span className="post-time">{moment(post.createdAt).fromNow(true)}</span>
+          
+          {isPostDetailsPage && (user?._id === post.userId?._id || user?.role === "admin") && (
+            <button 
+              onClick={handleDelete} 
+              className="action-btn text-danger"
+              style={{ padding: 0 }}
+              title="Delete Post"
+            >
+              <AiOutlineDelete size={20} />
+            </button>
+          )}
+        </div>
       </div>
 
       {post.images && post.images.length > 0 && (
