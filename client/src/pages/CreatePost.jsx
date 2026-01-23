@@ -111,7 +111,6 @@ const CreatePost = () => {
                   onChange={handleFileChange}
                 />
                 <Button 
-                  type="button"
                   variant="link" 
                   className="icon-btn" 
                   onClick={() => fileInputRef.current.click()}

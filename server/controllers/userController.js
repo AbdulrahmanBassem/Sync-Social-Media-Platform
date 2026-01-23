@@ -45,8 +45,7 @@ exports.updateProfilePicture = async (req, res) => {
     if (!req.file) return res.status(400).json({ message: "No image uploaded" });
 
     const userId = req.user.id;
-    // const profilePicPath = `/uploads/${req.file.filename}`; 
-    const profilePicPath = req.file.path;
+    const profilePicPath = `/uploads/${req.file.filename}`; 
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
