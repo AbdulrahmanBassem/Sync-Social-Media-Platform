@@ -46,7 +46,7 @@ exports.updateProfilePicture = async (req, res) => {
 
     const userId = req.user.id;
     // const profilePicPath = `/uploads/${req.file.filename}`; 
-    const profilePicPath = req.files.map((file) => file.path);
+    const profilePicPath = req.file.path;
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
