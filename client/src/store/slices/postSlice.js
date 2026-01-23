@@ -6,9 +6,10 @@ export const createPost = createAsyncThunk(
   "posts/createPost",
   async (postData, { rejectWithValue }) => {
     try {
-      const response = await API.post("/posts", postData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      // const response = await API.post("/posts", postData, {
+      //   headers: { "Content-Type": "multipart/form-data" },
+      // });
+      const response = await API.post("/posts", postData);
       toast.success("Post created successfully!");
       return response.data;
     } catch (error) {
