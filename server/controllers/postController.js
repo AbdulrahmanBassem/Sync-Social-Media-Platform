@@ -10,7 +10,8 @@ exports.createPost = async (req, res) => {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: "At least one image is required." });
     }
-    const images = req.files.map((file) => `/uploads/${file.filename}`);
+    // const images = req.files.map((file) => `/uploads/${file.filename}`);
+    const images = req.files.map((file) => file.path);
 
     const { caption, tags } = value;
     const formattedTags = tags 
