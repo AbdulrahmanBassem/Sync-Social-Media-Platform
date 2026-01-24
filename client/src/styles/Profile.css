@@ -136,6 +136,11 @@
   font-size: 14px;
 }
 
+.mobile-action-btn {
+  display: none !important; 
+}
+
+
 @media (max-width: 735px) {
   .profile-header {
     flex-direction: column;
@@ -167,5 +172,11 @@
   
   .profile-grid {
     gap: 3px;
+  }
+
+  .mobile-action-btn {
+    display: inline-flex !important; 
+    align-items: center;
+    justify-content: center;
   }
 }

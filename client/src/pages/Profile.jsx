@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../store/slices/authSlice";
+import { toggleTheme } from "../store/slices/themeSlice";
 import { getUserProfile, getUserPosts, updateUserProfile, updateProfilePicture } from "../store/slices/profileSlice";
 import { Spinner, Button, Modal, Form } from "react-bootstrap";
-import { AiFillCamera } from "react-icons/ai";
+import { AiFillCamera, AiOutlineLogout, AiOutlineBgColors } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import "../styles/Profile.css"; 
 
@@ -59,6 +61,15 @@ const Profile = () => {
     navigate("/messages", { state: { chatWith: profile } });
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme());
+  };
+
   if (loading && !profile) {
     return (
       <div className="d-flex justify-content-center mt-5">
@@ -97,17 +108,42 @@ const Profile = () => {
               <div className="profile-title-row">
                 <h2 className="profile-username">{profile.username}</h2>
                 {isOwnProfile ? (
-                  <Button 
-                    variant="outline-secondary" 
-                    size="sm" 
-                    className="edit-profile-btn"
-                    onClick={() => {
-                      setEditData({ name: profile.name, bio: profile.bio || "" });
-                      setShowEditModal(true);
-                    }}
-                  >
-                    Edit Profile
-                  </Button>
+                  <div className="d-flex gap-2 align-items-center">
+                    <Button 
+                      variant="outline-secondary" 
+                      size="sm" 
+                      className="edit-profile-btn"
+                      onClick={() => {
+                        setEditData({ name: profile.name, bio: profile.bio || "" });
+                        setShowEditModal(true);
+                      }}
+                    >
+                      Edit Profile
+                    </Button>
+
+                    {/* Mobile Only: Theme Toggle */}
+                    <Button 
+                      variant="outline-secondary" 
+                      size="sm"
+                      className="mobile-action-btn"
+                      onClick={handleThemeToggle}
+                      title="Switch Theme"
+                    >
+                      <AiOutlineBgColors />
+                    </Button>
+
+                    {/* Mobile Only: Logout */}
+                    <Button 
+                      variant="outline-danger" 
+                      size="sm"
+                      className="mobile-action-btn"
+                      onClick={handleLogout}
+                      title="Logout"
+                    >
+                      <AiOutlineLogout />
+                    </Button>
+                  </div>
+                  
                 ) : (
                   <Button 
                     variant="primary" 
