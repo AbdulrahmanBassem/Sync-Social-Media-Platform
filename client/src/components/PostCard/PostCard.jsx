@@ -28,7 +28,12 @@ const PostCard = ({ post }) => {
   const isPostDetailsPage = location.pathname.startsWith("/post/");
 
   const getImageUrl = (path) => {
-    if (!path) return "";
+    if (!path) return "/default-profile-picture.jpg";
+    
+    if (path.includes("default-profile-picture.jpg")) {
+      return "/default-profile-picture.jpg";
+    }
+    
     return path.startsWith("http") ? path : `${serverUrl}${path}`;
   };
 
